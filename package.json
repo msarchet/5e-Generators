@@ -23,14 +23,14 @@
   },
   "homepage": "https://github.com/msarchet/5e-Generators#readme",
   "devDependencies": {
-    "babel-jest": "^13.0.0",
+    "babel-jest": "^15.0.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "enzyme": "^2.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "jest-cli": "^13.0.0",
+    "jest-cli": "^15.1.1",
     "react-addons-test-utils": "^15.1.0",
-    "reactpack": "^0.7.2",
+    "reactpack": "^0.8.0",
     "sinon": "^1.17.4"
   },
   "dependencies": {
