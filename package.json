@@ -1,0 +1,61 @@
+{
+  "name": "5e-Generators",
+  "version": "0.1.0",
+  "description": "A Series of Generators for 5th Edition Dungeons and Dragons",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./node_modules/reactpack/cli.js ./src/index.js --dev --watch",
+    "test": "node ./node_modules/standard/bin/cmd.js __tests__/**/*.js && node ./node_modules/jest-cli/bin/jest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msarchet/5e-Generators.git"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "build"
+  ],
+  "author": "Michael Sarchet <mikesarchet@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/msarchet/5e-Generators/issues"
+  },
+  "homepage": "https://github.com/msarchet/5e-Generators#readme",
+  "devDependencies": {
+    "babel-jest": "^13.0.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "enzyme": "^2.3.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jest-cli": "^13.0.0",
+    "react-addons-test-utils": "^15.1.0",
+    "reactpack": "^0.7.2",
+    "sinon": "^1.17.4"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-css-modules": "^3.7.6",
+    "react-dom": "^15.1.0"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/enzyme",
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/sinon",
+      "<rootDir>/node_modules/react-css-modules"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "jest",
+      "describe",
+      "it",
+      "expect",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}
