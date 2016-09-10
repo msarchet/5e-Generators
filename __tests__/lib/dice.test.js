@@ -1,4 +1,5 @@
 import Dice from '../../src/lib/dice'
+import Die from '../../src/lib/die'
 
 const getDiceValue = dice => {
   return dice.rolledDice.reduce((initial, die) => {
@@ -12,11 +13,7 @@ const getDiceValue = dice => {
 
 const generateDice = (values, sides) => {
   return values.map(value => {
-    return {
-      value,
-      sides,
-      invalid: false
-    }
+    return new Die(value, sides)
   })
 }
 describe('Dice', () => {
@@ -53,7 +50,10 @@ describe('Dice', () => {
       dice.reroll([1])
 
       dice.rolledDice.forEach(die => {
-        if (!die.invalid) {
+        if (die.invalid) {
+          expect(die.value).toEqual(1)
+          expect(die.reasons).toEqual([Dice.InvalidReasons.REROLL])
+        } else {
           expect(die.value).not.toEqual(1)
         }
       })
@@ -67,6 +67,7 @@ describe('Dice', () => {
       dice.rolledDice.forEach(die => {
         if (die.value === 1) {
           expect(die.invalid).toEqual(true)
+          expect(die.reasons).toEqual([Dice.InvalidReasons.DROPPED])
         } else {
           expect(die.value).toEqual(6)
         }
@@ -84,12 +85,25 @@ describe('Dice', () => {
       dice.rolledDice.forEach(die => {
         if (die.value === 1) {
           expect(die.invalid).toEqual(true)
+          expect(die.reasons).toEqual([Dice.InvalidReasons.DROPPED])
         } else {
           expect(die.value).toEqual(6)
         }
       })
 
       expect(dice.value).toEqual(18)
+    })
+
+    it('should only reroll once on a one time', () => {
+      const dice = new Dice(6, 6)
+      dice.rolledDice = generateDice([1, 1, 1, 6, 6, 6], 6)
+      dice.rerollOnce([1])
+
+      expect(dice.rolledDice.length).toEqual(9)
+
+      expect(dice.rolledDice[0].invalid).toEqual(true)
+      expect(dice.rolledDice[1].invalid).toEqual(true)
+      expect(dice.rolledDice[2].invalid).toEqual(true)
     })
   })
 })
