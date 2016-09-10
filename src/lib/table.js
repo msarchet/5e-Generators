@@ -1,9 +1,5 @@
-/* @flow */
 export default class Table
 {
-  rows
-  index
-
   constructor () {
     this.rows = []
     this.index = {}
