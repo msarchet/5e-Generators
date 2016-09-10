@@ -17,6 +17,14 @@ const generateDice = (values, sides) => {
   })
 }
 describe('Dice', () => {
+  it('should throw an error if constructed incorrectly', () => {
+    try {
+      const dice = new Dice('1', '2') // eslint-disable-line
+    } catch (e) {
+      expect(e.message).toEqual('Must provide numbers as arguments')
+    }
+  })
+
   it('should construct the correct number of dice', () => {
     const dice = new Dice(2, 1)
     expect(dice.number).toEqual(2)
