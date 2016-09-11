@@ -1,3 +1,6 @@
+import { takeRight } from 'lodash'
+import Dice from './dice'
+
 export default class Table
 {
   constructor (name) {
@@ -17,12 +20,17 @@ export default class Table
     }
   }
 
-  roll () {
+  roll (rolls = 1) {
     // determine a random number for the number of items on the table
-    let last = this.index[this.index.length - 1]
-    let value = +Math.random(last)
-    let row = this.rows[value]
+    let last = takeRight(Object.keys(this.index), 1)
 
-    return row
+    let values = Dice.createDice(rolls, last).rolledDice
+    let rows = []
+
+    for (var i = 0; i < rolls; i++) {
+      rows.push(this.rows[values[i].value - 1])
+    }
+
+    return rows
   }
 }
