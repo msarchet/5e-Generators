@@ -1,8 +1,9 @@
 export default class Table
 {
-  constructor () {
+  constructor (name) {
     this.rows = []
     this.index = {}
+    this.name = name
   }
 
   addRow (row) {
