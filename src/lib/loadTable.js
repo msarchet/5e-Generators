@@ -15,6 +15,16 @@ class Storage
   get (id) {
     return window.localStorage.getItem(`${this.key}-${id}`)
   }
+
+  list (mapper) {
+    return Object.keys(window.localStorage).reduce((items, key) => {
+      if (key.indexOf(this.key) === 0) {
+        items.push(mapper(window.localStorage.getItem(key)))
+      }
+
+      return items
+    }, [])
+  }
 }
 
 export default class TableStorage extends Storage
@@ -34,5 +44,9 @@ export default class TableStorage extends Storage
       table.id = id
     }
     super.store(id, Table.toJson(table))
+  }
+
+  list () {
+    return super.list(Table.fromJson)
   }
 }
