@@ -1,5 +1,6 @@
 import { takeRight } from 'lodash'
 import Dice from './dice'
+import TableRow from './tableRow'
 
 export default class Table
 {
@@ -7,6 +8,7 @@ export default class Table
     this.rows = []
     this.index = {}
     this.name = name
+    this.id = ''
   }
 
   addRow (row) {
@@ -32,5 +34,25 @@ export default class Table
     }
 
     return rows
+  }
+
+  static fromJson (json) {
+    let parsed = JSON.parse(json)
+    let table = new Table(parsed.name)
+    table.id = parsed.id
+    parsed.rows.forEach(row => {
+      const newRow = new TableRow(row.lowerBound, row.upperBound, row.result, row.type)
+      table.addRow(newRow)
+    })
+
+    return table
+  }
+
+  static toJson (table) {
+    return JSON.stringify({
+      name: table.name,
+      id: table.id,
+      rows: table.rows
+    })
   }
 }

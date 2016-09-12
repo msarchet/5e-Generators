@@ -13,5 +13,9 @@ export default class TableRow {
   isValid (value) {
     return value >= this.lowerBound && value <= this.upperBound
   }
+
+  static get Types () {
+    return ['result', 'table']
+  }
 }
 

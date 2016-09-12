@@ -1,3 +1,5 @@
+import uuid from 'uuid'
+
 import Table from './table'
 
 class Storage
@@ -7,7 +9,6 @@ class Storage
   }
 
   store (id, item) {
-    console.log('calling store', id, item)
     window.localStorage.setItem(`${this.key}-${id}`, item)
   }
 
@@ -15,6 +16,7 @@ class Storage
     return window.localStorage.getItem(`${this.key}-${id}`)
   }
 }
+
 export default class TableStorage extends Storage
 {
   constructor () {
@@ -23,14 +25,14 @@ export default class TableStorage extends Storage
 
   get (id) {
     let loaded = super.get(id)
-    console.log(loaded)
-    if (loaded === null) {
-      let parsed = JSON.parse(loaded)
-      let table = new Table(parsed.name)
-      parsed.rows.forEach(table.addRow.bind(table))
-      return table
-    }
+    return Table.fromJson(loaded)
+  }
 
-    return null
+  store (table) {
+    const id = table.id || uuid.v4()
+    if (!table.id || table.id === '') {
+      table.id = id
+    }
+    super.store(id, Table.toJson(table))
   }
 }
