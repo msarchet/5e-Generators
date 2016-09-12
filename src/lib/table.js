@@ -7,6 +7,7 @@ export default class Table
   constructor (name) {
     this.rows = []
     this.index = {}
+    this.tags = []
     this.name = name
     this.id = ''
   }
@@ -20,6 +21,18 @@ export default class Table
 
       this.index[i] = row
     }
+  }
+
+  removeRow (index) {
+    this.rows.splice(index, 1)
+  }
+
+  addTag (tag) {
+    this.tags.push(tag)
+  }
+
+  removeTag (tag) {
+    this.tags.splice(this.tags.indexOf(tag), 1)
   }
 
   roll (rolls = 1) {
@@ -45,6 +58,10 @@ export default class Table
       table.addRow(newRow)
     })
 
+    if (parsed.tags) {
+      parsed.tags.forEach(tag => { table.addTag(tag) })
+    }
+
     return table
   }
 
@@ -52,7 +69,8 @@ export default class Table
     return JSON.stringify({
       name: table.name,
       id: table.id,
-      rows: table.rows
+      rows: table.rows,
+      tags: table.tags
     })
   }
 }

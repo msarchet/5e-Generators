@@ -53,5 +53,8 @@
       "beforeEach",
       "afterEach"
     ]
+  },
+  "jest" : {
+    "setupFiles": "__jest__/setupEnvScriptFile.js"
   }
 }

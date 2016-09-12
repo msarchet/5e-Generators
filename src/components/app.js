@@ -4,7 +4,6 @@ import CSSModules from 'react-css-modules'
 import styles from './styles/app.css'
 
 import TableModel from '../lib/table'
-import TableRowModel from '../lib/tableRow'
 import TableStorage from '../lib/loadTable'
 
 import Table from './table'
@@ -15,9 +14,9 @@ const tableStorage = new TableStorage()
 const selectTableOptions = tables => {
   return {
     fields: [
-      { 
-        name: 'table', 
-        type: 'select', 
+      {
+        name: 'table',
+        type: 'select',
         values: tables.map(table => {
           return {
             label: table.name,
@@ -29,13 +28,13 @@ const selectTableOptions = tables => {
     ],
     label: 'Select a Table',
     direction: SimpleForm.Directions.Horizontal,
-    submitText: 'Select' 
+    submitText: 'Select'
   }
 }
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { tables: tableStorage.list(), table: null }
+    this.state = { tables: tableStorage.list() || [], table: null }
   }
 
   setTable (formData) {

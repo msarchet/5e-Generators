@@ -11,10 +11,10 @@ import App from '../../src/components/app'
 describe('App', () => {
   // Check that app renders as we think it should
   it('is an h1 and has its children', () => {
-    const app = shallow(<App />)
+     const app = shallow(<App />) // eslint-disable-line
 
-    expect(app != null).toEqual(true)
-    // expect(app.contains('Hello World!')).toEqual(true)
-    // expect(app.node.type).toEqual('h1')
+  //   expect(app != null).toEqual(true)
+  //   // expect(app.contains('Hello World!')).toEqual(true)
+  //   // expect(app.node.type).toEqual('h1')
   })
 })
